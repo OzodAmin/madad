@@ -1,0 +1,47 @@
+@extends('admin.layouts.app')
+
+@section('title')
+    Update news
+@endsection
+
+@section('content')
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Update news</h1>
+    </div>
+
+     @if (count($errors) > 0)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading"><strong>Whoops!</strong> There were some problems with your input.</h4>
+            <hr>
+            @foreach ($errors->all() as $error)
+                <p class="mb-0">{{ $error }}</p>
+            @endforeach
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    {!! Form::model($news, ['method' => 'PATCH','route' => ['news.update', $news->id], 'files' => true]) !!}
+
+        @include('admin.news.fields')
+
+    {!! Form::close() !!}
+@endsection
+
+@section('script')
+    <script src="{{ asset('admin/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        <?php $key = 1; foreach( LaravelLocalization::getSupportedLocales() as $locale => $properties ): ?>
+        CKEDITOR.replace('editor{{ $key }}',{
+            filebrowserBrowseUrl: '/admin/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl: '/admin/ckfinder/ckfinder.html?type=Images',
+            filebrowserUploadUrl: '/admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl: '/admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
+        });
+        <?php $key++; endforeach; ?>
+      // CKEDITOR.replace('editor1');
+      // CKEDITOR.replace('editor2');
+      // alert(CKEDITOR.version);
+    </script>
+@endsection

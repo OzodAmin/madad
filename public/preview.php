@@ -1,0 +1,1 @@
+<?php $data = $_POST['htmlData']; if ( get_magic_quotes_gpc() ) $data = stripslashes( $data ) ; echo $data ; ?>
