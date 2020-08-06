@@ -87,21 +87,24 @@
               <div class="row">
                 <div class="col-lg-12 col-md-12">
                   <h3 class="theme-color mb-3">Оставить комментарий</h3>
+
+                  <div id="response"></div>
                   
-                  <form id="contactform" class="gray-form form-row" role="form" method="post" action="#">
+                  <form id="commentform" class="gray-form form-row" role="form">
+                    <input type="hidden" name="news" value="{!!$news->id!!}">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name">
+                        <input type="text" class="form-control" name="name" placeholder="Your Name">
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email Adress">
+                        <input type="email" class="form-control" name="email" placeholder="Email Adress">
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputphone1" placeholder="Phone Number">
+                        <input type="text" class="form-control" name="phone" placeholder="Phone Number">
                       </div>
                     </div>
                     <div class="col-lg-12 col-md-12">
@@ -111,7 +114,7 @@
                     </div>
                     
                     <div class="col-lg-12 col-md-12">
-                      <button id="submit" name="submit" type="submit" value="Send" class="btn-submit"><span>Отправить</span></button>
+                      <button id="submit" name="submit" type="submit" class="btn-submit"><span>Отправить</span></button>
                     </div>
                   </form>
                 </div>
@@ -190,4 +193,40 @@
       </div>
     </section>
   </main>
+@endsection
+
+@section('script')
+<script>
+  $("#submit").click(function(event){
+      event.preventDefault();
+
+      let name = $("input[name=name]").val();
+      let news = $("input[name=news]").val();
+      let email = $("input[name=email]").val();
+      let phone = $("input[name=phone]").val();
+      let message = $("textarea[name=message]").val();
+      let _token   = $('meta[name="csrf-token"]').attr('content');
+
+      $.ajax({
+        url: "/comment",
+        type:"POST",
+        data:{
+          name:name,
+          news:news,
+          email:email,
+          phone:phone,
+          message:message,
+          _token: _token
+        },
+        success:function(response){
+          console.log(response);
+          if(response) {
+            $('.alert').alert('close')
+            $('#response').html(response.message);
+            if (response.status == 'success') {$("#commentform")[0].reset();}
+          }
+        },
+       });
+  });
+</script>
 @endsection

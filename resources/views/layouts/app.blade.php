@@ -246,5 +246,6 @@
         var image = document.getElementsByClassName('parallax');
         new simpleParallax(image);
     </script>
+    @yield('script')
 </body>
 </html>

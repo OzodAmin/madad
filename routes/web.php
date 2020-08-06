@@ -15,6 +15,7 @@ Route::group(
     Route::get('/sitemap', 'HomeController@sitemap');
     Route::get('/news', 'HomeController@news');
     Route::get('/news/{news}', 'HomeController@singleNews');
+    Route::post('/comment', 'HomeController@comment');
 });
 
 Auth::routes(['register' => false]);

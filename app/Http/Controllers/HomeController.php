@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Http\Request;
+use App\Model\Comment;
 use App\Model\News;
 use App\Model\Category;
 
@@ -29,5 +30,21 @@ class HomeController extends Controller
     {
         $categories = Category::whereTranslation('locale', LaravelLocalization::getCurrentLocale())->get();
         return view('pages.sitemap',compact('categories'));
+    }
+
+    public function comment(Request $request)
+    {
+        $message = '';
+        if (empty($request->name))
+            $message .= trans('messages.commentNameEmpty');
+        if (empty($request->message))
+            $message .= trans('messages.commentMessageEmpty');
+        if (empty($request->email) && empty($request->phone))
+            $message .= trans('messages.commentContatctEmpty');
+
+        if (empty($message)) {
+            return response()->json(['status'=>'success','message'=>'<div class="alert-success alert alert-dismissible fade show" role="alert"><strong>'.trans('messages.success').'</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>']);
+        }else
+            return response()->json(['status'=>'failure','message'=>'<div class="alert-danger alert alert-dismissible fade show" role="alert"><strong>'.$message.'</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>']);
     }
 }

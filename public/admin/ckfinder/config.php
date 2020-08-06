@@ -32,8 +32,11 @@ $config['authentication'] = function () {
 /*============================ License Key ============================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-$config['licenseName'] = 'http://localhost:8080';
-$config['licenseKey']  = '*L?N-*1**-T**X-*T**-*V**-3*B*-2**B';
+// $config['licenseName'] = 'http://localhost:8080';
+// $config['licenseKey']  = '*L?N-*1**-T**X-*T**-*V**-3*B*-2**B';
+
+$config['licenseName'] = 'http://group-madad.ru';
+$config['licenseKey']  = '*3?5-*1**-V**P-*V**-*X**-H*M*-2**J';
 
 /*============================ CKFinder Internal Directory ============================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_privateDir
