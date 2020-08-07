@@ -12,6 +12,8 @@ Route::group(
     Route::get('/partner', function () {return view('pages.partner');});
     Route::get('/contact', function () {return view('pages.contact');});
     Route::get('/project', function () {return view('pages.project');});
+    Route::get('/faq', function () {return view('pages.faq');});
+    Route::get('/legacy', function () {return view('pages.legacy');});
     Route::get('/sitemap', 'HomeController@sitemap');
     Route::get('/news', 'HomeController@news');
     Route::get('/news/{news}', 'HomeController@singleNews');
@@ -31,4 +33,5 @@ Route::group(['prefix' => 'backend','middleware' => ['can:backend']], function (
     Route::resource('news', 'Admin\NewsController');
     Route::get('news/destroy/{id}', 'Admin\NewsController@destroy');
     Route::resource('user', 'Admin\UserController')->except(['show', 'destroy']);
+    Route::resource('comment', 'Admin\CommentController');
 });

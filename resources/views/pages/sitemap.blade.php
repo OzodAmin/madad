@@ -37,16 +37,7 @@
             </li>
             <ul>
             @foreach ($categories as $category)
-            <li><a href="#"><strong>{{ $category->title }}</strong></a></li>
-              <ul>
-              @foreach ($category->news as $news)
-                <li>
-                  <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), 'news/'.$news->slug) }}">
-                    {{ $news->title }}
-                  </a>
-                </li>
-              @endforeach
-              </ul>
+              <li><a href="#"><strong>{{ $category->title }}</strong></a></li>
             @endforeach
             </ul>
             <li>

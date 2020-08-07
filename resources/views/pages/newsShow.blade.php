@@ -58,11 +58,13 @@
                       
                     <div class="share">
                       <p>Поделиться: </p>
+                      <?php $shareUrl= rawurlencode(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), 'news/'.$news->slug));?>
                       <div class="share-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a target="_blank" href="http://www.facebook.com/sharer.php?u=<?=$shareUrl;?>"><i class="fab fa-facebook-f"></i></a>
+                        <a target="_blank" href="https://t.me/share/url?url=<?=$shareUrl;?>"><i class="fab fa-telegram-plane"></i></a>
+                        <a target="_blank" href="http://vkontakte.ru/share.php?url=<?=$shareUrl;?>"><i class="fab fa-vk"></i></a>
+                        <a target="_blank" href="https://twitter.com/share?url=<?=$shareUrl;?>"><i class="fab fa-twitter"></i></a>
+                        <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?=$shareUrl;?>"><i class="fab fa-linkedin"></i></a>
                       </div>
                     </div>
                   </div>
@@ -70,16 +72,14 @@
               </div>
 
               <div class="blog-comments mt-5">
+                @foreach ($comments as $comment)
                 <div class="comments-1">
                   <div class="comments-info">
-                    <h4 class="theme-color"> Kevin Martin <span>Sep 15, 2017</span></h4>
-                    <p>Sit amet nibh vulputate cursus a sit amet mauris lorem ipsum dolor sit amet of Lorem Ipsum.
-                      Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                      nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio <a
-                        href="#">http://themeforest.net</a> Morbi accumsan ipsum velit. Nam nec tellus a odio
-                      tincidunt auctor a ornare odio. Sed non mauris vitae erat </p>
+                    <h4 class="theme-color"> {{$comment->name}} <span><?=date('d.m.Y', strtotime($comment->created_at));?></span></h4>
+                    <p>{{$comment->content}}</p>
                   </div>
                 </div>
+                @endforeach
               </div>
 
               <br>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-lg-12 col-md-12">
                       <div class="form-group">
-                        <textarea class="form-control" rows="7" placeholder="message"></textarea>
+                        <textarea id="txtBox" class="form-control" rows="7" placeholder="message"></textarea>
                       </div>
                     </div>
                     
@@ -204,7 +204,8 @@
       let news = $("input[name=news]").val();
       let email = $("input[name=email]").val();
       let phone = $("input[name=phone]").val();
-      let message = $("textarea[name=message]").val();
+      let message = $("#txtBox").val();
+      let lang = '{{LaravelLocalization::getCurrentLocale()}}';
       let _token   = $('meta[name="csrf-token"]').attr('content');
 
       $.ajax({
@@ -216,6 +217,7 @@
           email:email,
           phone:phone,
           message:message,
+          lang:lang,
           _token: _token
         },
         success:function(response){

@@ -89,6 +89,14 @@
         </li>
       @endcan
 
+      @can('comment-list')
+        <li class="nav-item {{ (request()->is('backend/comment')) ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('comment.index') }}">
+            <i class="fas fa-fw fa-comments"></i>
+            <span>Comment</span></a>
+        </li>
+      @endcan
+
       <hr class="sidebar-divider">
 
       <!-- Nav Item - Charts -->

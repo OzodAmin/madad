@@ -25,6 +25,7 @@
 
     <link rel="stylesheet" href="{{ asset('front/libs/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{asset('front/css/main.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/css/cookie.css')}}">
     
     @yield('css')
     
@@ -224,21 +225,26 @@
                 <div class="copyright">© <script>document.write(new Date().getFullYear());</script> {!! __('nav.rights') !!}</div>
                 <div class="footer__bottom--links">
                     <div>
-                        <a href="#">{!! __('nav.conf') !!}</a>
+                        <a href="{{ LaravelLocalization::localizeUrl('/legacy') }}">{!! __('nav.conf') !!}</a>
                     </div>
                     <div>
-                        <a href="#">{!! __('nav.faq') !!}</a>
+                        <a href="{{ LaravelLocalization::localizeUrl('/faq') }}">{!! __('nav.faq') !!}</a>
                     </div>
                     <div>
                         <a href="{{ LaravelLocalization::localizeUrl('/sitemap') }}">{!! __('nav.sitemap') !!}</a>
                     </div>
-                    <div>
+                    {{-- <div>
                         <a href="#">{!! __('nav.help') !!}</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </footer>
+
+    <div class="alert text-center cookiealert" role="alert">
+      <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="https://cookiesandyou.com/" target="_blank">Learn more</a>
+      <button type="button" class="btn btn-primary btn-sm acceptcookies">I agree</button>
+    </div>
     
     <script src="{{ asset('front/js/main.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
@@ -246,6 +252,7 @@
         var image = document.getElementsByClassName('parallax');
         new simpleParallax(image);
     </script>
+    <script src="{{ asset('front/js/cookiealert.js') }}"></script>
     @yield('script')
 </body>
 </html>

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    protected $table = 'comment';
-    protected $fillable = ['name','email','phone','content','news_id'];
-    protected $casts = ['news_id' => 'integer'];
-    public $timestamps = false;
+    protected $table = 'permissions';
+    protected $fillable = ['name'];
+    protected $attributes = ['guard_name' => 'web'];
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Comment;
 use App\Model\News;
 use App\Model\Category;
+use App;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,8 @@ class HomeController extends Controller
         $news->view ++;
         $news->save();
         $mostViewedNews = News::whereTranslation('locale', LaravelLocalization::getCurrentLocale())->orderBy('view', 'desc')->take(4)->get();
-        return view('pages.newsShow',compact('news','mostViewedNews'));
+        $comments = Comment::where('status', '1')->where('news_id', $news->id)->orderBy('created_at', 'desc')->get();
+        return view('pages.newsShow',compact('news','mostViewedNews','comments'));
     }
 
     public function sitemap()
@@ -34,16 +36,18 @@ class HomeController extends Controller
 
     public function comment(Request $request)
     {
+        App::setLocale($request->lang);
         $message = '';
         if (empty($request->name))
-            $message .= trans('messages.commentNameEmpty');
-        if (empty($request->message))
-            $message .= trans('messages.commentMessageEmpty');
+            $message .= __('messages.commentNameEmpty');
         if (empty($request->email) && empty($request->phone))
-            $message .= trans('messages.commentContatctEmpty');
+            $message .= __('messages.commentContatctEmpty');
+        if (empty($request->message))
+            $message .= __('messages.commentMessageEmpty');
 
         if (empty($message)) {
-            return response()->json(['status'=>'success','message'=>'<div class="alert-success alert alert-dismissible fade show" role="alert"><strong>'.trans('messages.success').'</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>']);
+            Comment::create(['name' => $request->input('name'), 'email' => $request->input('email'), 'phone' => $request->input('phone'), 'content' => $request->input('message'), 'news_id' => $request->input('news')]);
+            return response()->json(['status'=>'success','message'=>'<div class="alert-success alert alert-dismissible fade show" role="alert"><strong>'.__('messages.success').'</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>']);
         }else
             return response()->json(['status'=>'failure','message'=>'<div class="alert-danger alert alert-dismissible fade show" role="alert"><strong>'.$message.'</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>']);
     }
