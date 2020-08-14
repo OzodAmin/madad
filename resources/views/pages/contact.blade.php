@@ -10,7 +10,7 @@
       <div class="d-flex justify-content-between align-items-md-center flex-md-row flex-column">
         <div class="page-title">
           <h2>{!! __('nav.contact') !!}</h2>
-          <p>{!! __('about.about1') !!}</p>
+          <p>{!! __('contacts.contacts1') !!}</p>
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ LaravelLocalization::localizeUrl('/') }}"><i class="fas fa-home mr-1"></i> {!! __('nav.main') !!}</a></li>

@@ -6,15 +6,18 @@ Route::group(
 	'prefix' => LaravelLocalization::setLocale(),
 	'middleware' => [ 'localize', 'localizationRedirect' ]
 ],function(){
-	Route::get('/', function () {return view('pages.index');});
+    Route::get('/', 'HomeController@index');
     Route::get('/about', function () {return view('pages.about');});
     Route::get('/service', function () {return view('pages.service');});
-    Route::get('/partner', function () {return view('pages.partner');});
     Route::get('/contact', function () {return view('pages.contact');});
-    Route::get('/project', function () {return view('pages.project');});
-    Route::get('/faq', function () {return view('pages.faq');});
     Route::get('/legacy', function () {return view('pages.legacy');});
+    Route::get('/projects', 'HomeController@projects');
+    Route::get('/consultants', 'HomeController@consultants');
+    Route::get('/partner', 'HomeController@partner');
     Route::get('/sitemap', 'HomeController@sitemap');
+    Route::get('/faq', 'HomeController@faq');
+    Route::get('/gallery', 'HomeController@gallery');
+    Route::get('/gallery-images/{gallery}', 'HomeController@galleryImages');
     Route::get('/news', 'HomeController@news');
     Route::get('/news/{news}', 'HomeController@singleNews');
     Route::post('/comment', 'HomeController@comment');
@@ -32,6 +35,18 @@ Route::group(['prefix' => 'backend','middleware' => ['can:backend']], function (
     Route::get('category/destroy/{id}', 'Admin\CategoryController@destroy');
     Route::resource('news', 'Admin\NewsController');
     Route::get('news/destroy/{id}', 'Admin\NewsController@destroy');
+    Route::resource('faq', 'Admin\FaqController');
+    Route::get('faq/destroy/{id}', 'Admin\FaqController@destroy');
+    Route::resource('project', 'Admin\ProjectController');
+    Route::get('project/destroy/{id}', 'Admin\ProjectController@destroy');
+    Route::resource('partner', 'Admin\PartnerController');
+    Route::get('partner/destroy/{id}', 'Admin\PartnerController@destroy');
+    Route::resource('consultant', 'Admin\ConsultantController');
+    Route::get('consultant/destroy/{id}', 'Admin\ConsultantController@destroy');
+    Route::resource('gallery', 'Admin\GalleryController');
+    Route::get('gallery/destroy/{id}', 'Admin\GalleryController@destroy');
+    Route::resource('gallery-images', 'Admin\GalleryImagesController');
+    Route::get('gallery-images/destroy/{id}', 'Admin\GalleryImagesController@destroy');
     Route::resource('user', 'Admin\UserController')->except(['show', 'destroy']);
     Route::resource('comment', 'Admin\CommentController');
 });

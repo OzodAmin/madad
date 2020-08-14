@@ -1,13 +1,15 @@
 @extends('admin.layouts.app')
 
 @section('title')
-	Permissions
+	Permission
 @endsection
 
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-		<h1 class="h3 mb-0 text-gray-800">Permissions</h1>
-		<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('permission.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New permission</a>
+		<h1 class="h3 mb-0 text-gray-800">Permission</h1>
+		@can('permission-create')
+			<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('permission.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New permission</a>
+		@endcan
 	</div>
 
 	@if ($message = Session::get('success'))
@@ -20,15 +22,33 @@
 	@endif
 
 	<div class="table-responsive">
-		<table class="table" id="datatable">
+		<table class="table">
 			<thead>
 				<tr>
-					<th width="60%">Permission</th>
-					<th width="40%">Action</th>
+					<th>Название</th>
+					<th>Permission</th>
+					<th>Action</th>
 				</tr>
 			</thead>
+			<tbody>
+				@foreach ($permissions as $obj)
+                    <tr>
+                        <td>{{ $obj->title }}</td>
+                        <td>{{ $obj->name }}</td>
+                        <td>
+                        	@can('permission-edit')
+                            	<a href="{{route('permission.edit',['permission'=>$obj->id])}}" class="btn btn-primary btn-sm">Edit</a>&nbsp;&nbsp;&nbsp;
+                            @endcan
+                            @can('permission-delete')
+                            	<button type="button" name="edit" id="{{$obj->id}}" class="delete btn btn-danger btn-sm">Delete</button>
+                            @endcan
+                        </td>
+                    </tr>
+                @endforeach
+			</tbody>
 		</table>
 	</div>
+	{{ $permissions->links() }}
 
 	<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 	    <div class="modal-dialog">
@@ -54,22 +74,6 @@
 @section('script')
 	<script>
 		$(document).ready(function(){
-			$('#datatable').DataTable({
-				processing: true,
-				serverSide: true,
-				ajax: {
-					url: "{{ route('permission.index') }}",
-					type: 'GET',
-				},
-				columns: [
-					{data: 'name', name: 'title' },
-					{data: 'action', name: 'action', orderable: false},
-				],
-				order: [[0, 'desc']]
-			});
-
-			var user_id;
-
 			$(document).on('click', '.delete', function(){
 				user_id = $(this).attr('id');
 				$('#ok_button').text('Yes');
@@ -86,8 +90,8 @@
 					{
 						setTimeout(function(){
 							$('#confirmModal').modal('hide');
-							$('#datatable').DataTable().ajax.reload();
 							alert('Data Deleted');
+							location.reload();
 						}, 1000);
 					}
 				})

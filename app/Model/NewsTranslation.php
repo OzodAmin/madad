@@ -25,5 +25,5 @@ class NewsTranslation extends Model
     }
     public $timestamps = false;
     public $table = 'news_translations';
-    public $fillable = ['title', 'content', 'slug'];
+    public $fillable = ['title', 'content', 'slug','short_des'];
 }

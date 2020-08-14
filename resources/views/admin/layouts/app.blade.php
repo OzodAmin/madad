@@ -32,7 +32,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-flag"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Exchange</div>
+        <div class="sidebar-brand-text mx-3">MADAD</div>
       </a>
 
       <!-- Divider -->
@@ -42,7 +42,7 @@
       <li class="nav-item {{ (request()->is('backend')) ? 'active' : '' }}">
         <a class="nav-link" href="/backend">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Панель управления</span></a>
       </li>
 
       <!-- Divider -->
@@ -53,7 +53,7 @@
         <li class="nav-item {{ (request()->is('backend/user')) ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('user.index') }}">
             <i class="fas fa-fw fa-user"></i>
-            <span>Users</span></a>
+            <span>Пользователи</span></a>
         </li>
       @endcan
 
@@ -61,7 +61,7 @@
         <li class="nav-item {{ (request()->is('backend/role')) ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('role.index') }}">
             <i class="fas fa-fw fa-key"></i>
-            <span>Roles</span></a>
+            <span>Роли</span></a>
         </li>
       @endcan
 
@@ -69,7 +69,7 @@
         <li class="nav-item {{ (request()->is('backend/permission')) ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('permission.index') }}">
             <i class="fas fa-fw fa-user-lock"></i>
-            <span>Permission</span></a>
+            <span>Разрешение</span></a>
         </li>
       @endcan
 
@@ -77,7 +77,7 @@
         <li class="nav-item {{ (request()->is('backend/category')) ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('category.index') }}">
             <i class="fas fa-fw fa-newspaper"></i>
-            <span>Category</span></a>
+            <span>Категория</span></a>
         </li>
       @endcan
 
@@ -85,7 +85,7 @@
         <li class="nav-item {{ (request()->is('backend/news')) ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('news.index') }}">
             <i class="fas fa-fw fa-newspaper"></i>
-            <span>News</span></a>
+            <span>Новости</span></a>
         </li>
       @endcan
 
@@ -93,7 +93,47 @@
         <li class="nav-item {{ (request()->is('backend/comment')) ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('comment.index') }}">
             <i class="fas fa-fw fa-comments"></i>
-            <span>Comment</span></a>
+            <span>Коментарии</span></a>
+        </li>
+      @endcan
+
+      @can('faq-list')
+        <li class="nav-item {{ (request()->is('backend/faq')) ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('faq.index') }}">
+            <i class="fas fa-fw fa-question"></i>
+            <span>FAQ</span></a>
+        </li>
+      @endcan
+
+      @can('partner-list')
+        <li class="nav-item {{ (request()->is('backend/partner')) ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('partner.index') }}">
+            <i class="fas fa-fw fa-handshake"></i>
+            <span>Партнеры</span></a>
+        </li>
+      @endcan
+
+      @can('gallery-list')
+        <li class="nav-item {{ (request()->is('backend/gallery')) ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('gallery.index') }}">
+            <i class="fas fa-fw fa-images"></i>
+            <span>Галерея</span></a>
+        </li>
+      @endcan
+
+      @can('consultant-list')
+        <li class="nav-item {{ (request()->is('backend/consultant')) ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('consultant.index') }}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Консультанты</span></a>
+        </li>
+      @endcan
+
+      @can('project-list')
+        <li class="nav-item {{ (request()->is('backend/project')) ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('project.index') }}">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Проекты</span></a>
         </li>
       @endcan
 
@@ -103,7 +143,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="fas fa-fw fa-sign-out-alt"></i>
-          <span>{{ __('Logout') }}</span></a>
+          <span>{{ __('Выход') }}</span></a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
           </form>

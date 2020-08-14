@@ -14,8 +14,11 @@
 				{!! Form::text($locale.'[title]', isset($news) ? $news->translate($locale)->title : null, ['class' => 'form-control']) !!}
 			</div>
 			<div class="form-group">
+				<label for="name">Краткое описание({{ $properties['native'] }}):</label>
+				{!! Form::text($locale.'[short_des]', isset($news) ? $news->translate($locale)->short_des : null, ['class' => 'form-control']) !!}
+			</div>
+			<div class="form-group">
 				{{ Form::textarea($locale.'[content]', isset($news) ? $news->translate($locale)->content : null, ['class' => 'form-control', 'id'=>'editor'.$key])}}
-				<!-- <textarea id="editor{{ $key }}" name="{{$locale.'[content]'}}" rows="10" data-sample-short></textarea> -->
 			</div>
 		</div>
 		<?php $key++; endforeach; ?>

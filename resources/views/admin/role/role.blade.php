@@ -7,9 +7,16 @@
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Roles</h1>
-		<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('role.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New role</a>
+		@can('role-create')
+			<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('role.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New role</a>
+		@endcan
 	</div>
 
+
+@can('role-edit')
+@endcan
+@can('role-delete')
+@endcan
 	@if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
 	  <strong>{{$message}}</strong>

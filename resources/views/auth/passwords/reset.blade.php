@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<header>
+<img class="parallax" src="{{asset('front/img/spb_fon.jpg')}}" alt="">
+
+</header>
+  <main>
+<section class="section-about-us position-relative">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,4 +68,6 @@
         </div>
     </div>
 </div>
+    </section>
+</main>
 @endsection

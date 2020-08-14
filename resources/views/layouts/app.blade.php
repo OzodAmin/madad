@@ -40,7 +40,7 @@
               </div>
     
               <div class="top-block__left--item">
-                  <a href="tel:8999 527 7070">8999 527 7070</a>
+                  <a href="tel:8965 797 8005">8965 797 8005</a>
               </div>
     
               <div class="top-block__left--item">
@@ -76,9 +76,10 @@
               </div>
               <div class="top-block__right--item">
                   <div class="social-icons social-icons-top">
-                      <a href="#facebook"><i class="fab fa-facebook-f"></i></a>
-                      <a href="#twitter"><i class="fab fa-twitter"></i></a>
-                      <a href="#google-plus"><i class="fab fa-google-plus-g"></i></a>
+                      <a href="#twitter"><i class="fab fa-facebook-f"></i></a>
+                      <a href="https://vk.com/uzbmadad"><i class="fab fa-vk"></i></a>
+                      <a href="https://www.youtube.com/channel/UCh7Kc8pOBtEo8D_lPqQW1vg?view_as=subscriber"><i class="fab fa-youtube"></i></a>
+                      <a href="https://www.instagram.com/madad.info/"><i class="fab fa-instagram"></i></a>
                   </div>
               </div>
           </div>
@@ -118,7 +119,7 @@
                       <a class="nav-link" href="{{ LaravelLocalization::localizeUrl('/service') }}">{!! __('nav.service') !!}</a>
                   </li>
                   <li class="nav-item {{ request()->is($langu.'/projects') ? 'active' : '' }}">
-                      <a class="nav-link" href="{{ LaravelLocalization::localizeUrl('/project') }}">{!! __('nav.project') !!}</a>
+                      <a class="nav-link" href="{{ LaravelLocalization::localizeUrl('/projects') }}">{!! __('nav.project') !!}</a>
                   </li>
                   <li class="nav-item {{ request()->is($langu.'/news') ? 'active' : '' }}">
                       <a class="nav-link" href="{{ LaravelLocalization::localizeUrl('/news') }}">{!! __('nav.news') !!}</a>
@@ -180,7 +181,7 @@
                                     <a href="{{ LaravelLocalization::localizeUrl('/service') }}">{!! __('nav.service') !!}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ LaravelLocalization::localizeUrl('/news') }}">{!! __('nav.news') !!}</a>
+                                    <a href="{{ LaravelLocalization::localizeUrl('/gallery') }}">{!! __('nav.gallery') !!}</a>
                                 </li>
                                 <li>
                                     <a href="#">{!! __('nav.project') !!}</a>
@@ -194,7 +195,7 @@
                     <div class="col-md-4 d-flex justify-content-md-end">
                         <div class="footer__info">
                             <h3 class="footer__title">{!! __('nav.contact') !!}</h3>
-                            <ul>
+                                <ul>
                                 <li><i class="far fa-map-marker mr-2"></i> {!! __('nav.address') !!}</li>
                                 <li>
                                     <i class="fas fa-phone-square-alt mr-2"></i>
@@ -208,10 +209,10 @@
                                 <li>
                                     <div class="footer__socials">
                                         <a href="#facebook"><i class="fab fa-facebook-f"></i></a>
-                                        <a href="#twitter"><i class="fab fa-twitter"></i></a>
-                                        <a href="#youtube"><i class="fab fa-youtube"></i></a>
-                                        <a href="#instagram"><i class="fab fa-instagram"></i></a>
-                                        <a href="#mail"><i class="far fa-envelope"></i></a>
+                                        <a href="https://vk.com/uzbmadad"><i class="fab fa-vk"></i></a>
+                                        <a href="https://www.youtube.com/channel/UCh7Kc8pOBtEo8D_lPqQW1vg?view_as=subscriber"><i class="fab fa-youtube"></i></a>
+                                        <a href="https://www.instagram.com/madad.info/"><i class="fab fa-instagram"></i></a>
+                                        
                                     </div>
                                 </li>
                             </ul>
@@ -242,8 +243,10 @@
     </footer>
 
     <div class="alert text-center cookiealert" role="alert">
-      <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="https://cookiesandyou.com/" target="_blank">Learn more</a>
-      <button type="button" class="btn btn-primary btn-sm acceptcookies">I agree</button>
+      {!! __('index.cookie') !!}
+      <button type="button" class="btn btn-primary btn-sm acceptcookies">
+        {!! __('index.cookieBtn') !!}
+      </button>
     </div>
     
     <script src="{{ asset('front/js/main.min.js') }}"></script>

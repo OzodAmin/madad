@@ -4,12 +4,12 @@
 
 @section('content')
   <header>
-    <img class="parallax" src="https://picsum.photos/id/66/1600/900" alt="">
+    <img class="parallax" src="{{asset('front/img/spb_fon.jpg')}}" alt="">
     <div class="container header-container">
       <div class="d-flex justify-content-between align-items-md-center flex-md-row flex-column">
         <div class="page-title">
           <h2>Новости</h2>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <p>Новости и мероприятие АНО "МАДАД"</p>
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ LaravelLocalization::localizeUrl('/') }}"><i class="fas fa-home mr-1"></i> {!! __('nav.main') !!}</a></li>

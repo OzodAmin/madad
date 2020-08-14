@@ -5,7 +5,7 @@
 @section('content')
     <!-- Header -->
     <header>
-    <img class="parallax" src="https://picsum.photos/id/67/1600/900" alt="">
+    <img class="parallax" src="{{asset('front/img/spb_fon.jpg')}}" alt="">
     <div class="container header-container">
       <div class="d-flex justify-content-between align-items-md-center flex-md-row flex-column">
         <div class="page-title">

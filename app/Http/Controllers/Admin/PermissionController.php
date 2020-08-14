@@ -20,17 +20,8 @@ class PermissionController extends Controller
 
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $data = Permission::latest()->get();
-            return DataTables::of($data)
-                    ->addColumn('action', function($data){
-                        $button = '<a href="'.route('permission.edit',['permission'=>$data->id]).'" class="btn btn-primary btn-sm">Edit</a>';
-                        $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
-                        return $button;
-                    })->rawColumns(['action'])
-                    ->make(true);
-        }
-        return view('admin.permission.index');
+        $permissions = Permission::orderBy('title', 'asc')->paginate(15);
+        return view('admin.permission.index',compact('permissions'));
     }
 
     public function create(){return view('admin.permission.create');}
@@ -38,7 +29,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required|unique:roles,name']);
-        Permission::create(['name' => $request->input('name')]);
+        Permission::create(['name' => $request->input('name'),'title' => $request->input('title')]);
         return redirect()->route('permission.index')->with('success','Permission created successfully');
     }
 
@@ -53,6 +44,7 @@ class PermissionController extends Controller
         $this->validate($request, ['name' => 'required',]);
         $permission = Permission::find($id);
         $permission->name = $request->input('name');
+        $permission->title = $request->input('title');
         $permission->save();
         return redirect()->route('permission.index')->with('success','Permission updated successfully');
     }

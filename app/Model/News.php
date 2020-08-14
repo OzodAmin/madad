@@ -13,7 +13,7 @@ class News extends Model implements TranslatableContract
 
     protected $table = 'news';
     public $translationModel = 'App\Models\NewsTranslation';
-    public $translatedAttributes = ['title', 'content', 'slug'];
+    public $translatedAttributes = ['title', 'content', 'slug','short_des'];
     protected $casts = ['user_id' => 'integer','category_id' => 'integer'];
     protected $fillable = ['user_id','category_id'];
 

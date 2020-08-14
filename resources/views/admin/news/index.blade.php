@@ -7,7 +7,9 @@
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">News</h1>
-		<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('news.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New news</a>
+		@can('news-create')
+			<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('news.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New news</a>
+		@endcan
 	</div>
 
 	@if ($message = Session::get('success'))
@@ -32,9 +34,12 @@
                     <tr>
                         <td>{{ $obj->title }}</td>
                         <td>
-                            <a href="{{route('news.edit',['news'=>$obj->id])}}" class="btn btn-primary btn-sm">Edit</a>
-                            &nbsp;&nbsp;&nbsp;
-                            <button type="button" name="edit" id="{{$obj->id}}" class="delete btn btn-danger btn-sm">Delete</button>
+                        	@can('news-edit')
+                            	<a href="{{route('news.edit',['news'=>$obj->id])}}" class="btn btn-primary btn-sm">Edit</a>&nbsp;&nbsp;&nbsp;
+                            @endcan
+                            @can('news-delete')
+                            	<button type="button" name="edit" id="{{$obj->id}}" class="delete btn btn-danger btn-sm">Delete</button>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

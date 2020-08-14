@@ -16,34 +16,14 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $data = User::latest()->get();
-            return DataTables::of($data)
-                    ->addColumn('action', function($data){
-                        $button = '<a href="'.route('user.edit',['user'=>$data->id]).'" class="btn btn-primary btn-block">Edit</a>';
-                        return $button;
-                    })
-                    ->addColumn('role', function($data){
-                        return $data->getRoleNames();
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-        return view('admin.user.index');
+        $users = User::paginate(15);
+        return view('admin.user.index',compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $rolesArray = [];
@@ -54,12 +34,6 @@ class UserController extends Controller
         return view('admin.user.create')->with('rolesArray', $rolesArray);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // echo "<pre>";print_r($request->role);die();

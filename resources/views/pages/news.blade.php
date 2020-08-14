@@ -4,12 +4,12 @@
 
 @section('content')
   <header>
-    <img class="parallax" src="https://picsum.photos/id/66/1600/900" alt="">
+    <img class="parallax" src="{{asset('front/img/spb_fon.jpg')}}" alt="">
     <div class="container header-container">
       <div class="d-flex justify-content-between align-items-md-center flex-md-row flex-column">
         <div class="page-title">
           <h2>Новости</h2>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <p>Новости и мероприятие АНО "МАДАД"</p>
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ LaravelLocalization::localizeUrl('/') }}"><i class="fas fa-home mr-1"></i> {!! __('nav.main') !!}</a></li>
@@ -49,19 +49,25 @@
                       </div>
                       <div class="news__calendar">
                         <i class="fal fa-calendar"></i>
-                        <span>{{$obj->created_at}}</span>
+                        <span><?=date('d.m.Y', strtotime($obj->created_at));?></span>
                       </div>
                     </div>
+                    <p class="news__subtitle">{{$obj->short_des}}</p>
                     <div class="d-flex justify-content-between align-items-md-center flex-md-row flex-column">
                       <a href="<?=$url;?>" class="btn-more btn-more__news order-md-2 order-2">ПОДРОБНО</a>
                       <div class="share order-md-3 order-1">
-                        <p>Поделиться: </p>
-                        <div class="share-links">
-                          <a href="#"><i class="fab fa-facebook-f"></i></a>
-                          <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                          <a href="#"><i class="fab fa-instagram"></i></a>
-                          <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
+                      <div class="share">
+                      <p>Поделиться: </p>
+                      <?php $shareUrl= rawurlencode(LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), 'news/'.$obj->slug));?>
+                      <div class="share-links">
+                        <a target="_blank" href="http://www.facebook.com/sharer.php?u=<?=$shareUrl;?>"><i class="fab fa-facebook-f"></i></a>
+                        <a target="_blank" href="https://t.me/share/url?url=<?=$shareUrl;?>"><i class="fab fa-telegram-plane"></i></a>
+                        <a target="_blank" href="http://vkontakte.ru/share.php?url=<?=$shareUrl;?>"><i class="fab fa-vk"></i></a>
+                        <a target="_blank" href="https://twitter.com/share?url=<?=$shareUrl;?>"><i class="fab fa-twitter"></i></a>
+                        <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?=$shareUrl;?>"><i class="fab fa-linkedin"></i></a>
+                      </div>
+                    </div>
+                   
                       </div>
                     </div>
                   </div>
@@ -107,7 +113,7 @@
                               </div>
                               <div class="news__calendar">
                                 <i class="fal fa-calendar"></i>
-                                <span>{{$obj->created_at}}</span>
+                                <span><?=date('d.m.Y', strtotime($obj->created_at));?></span>
                               </div>
                             </div>
                           </div>

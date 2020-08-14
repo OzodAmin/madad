@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 
 @section('title')
-	Comment
+	Комментарии
 @endsection
 
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-		<h1 class="h3 mb-0 text-gray-800">Comment</h1>
+		<h1 class="h3 mb-0 text-gray-800">Комментарии</h1>
 	</div>
 
 	@if ($message = Session::get('success'))
@@ -22,11 +22,11 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>News</th>
-					<th>Date</th>
-					<th>User name</th>
-					<th>User contact</th>
-					<th>Status</th>
+					<th>Новости</th>
+					<th>Дата</th>
+					<th>Имя пользователя</th>
+					<th>Контакт пользователя</th>
+					<th>Статус</th>
 					<th></th>
 				</tr>
 			</thead>

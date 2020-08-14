@@ -7,7 +7,9 @@
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Categories</h1>
-		<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('category.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New category</a>
+		@can('category-create')
+			<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ route('category.create') }}"><i class="fas fa-plus fa-sm text-white-50"></i> New category</a>
+		@endcan
 	</div>
 
 	@if ($message = Session::get('success'))
@@ -32,9 +34,13 @@
                     <tr>
                         <td>{{ $category->title }}</td>
                         <td>
+                        	@can('category-edit')
                             <a href="{{route('category.edit',['category'=>$category->id])}}" class="btn btn-primary btn-sm">Edit</a>
                             &nbsp;&nbsp;&nbsp;
+                            @endcan
+                            @can('category-delete')
                             <button type="button" name="edit" id="{{$category->id}}" class="delete btn btn-danger btn-sm">Delete</button>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

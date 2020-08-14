@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'siteName' => 'АНО "МАДАД"',
-    'slider' => 'UZB Lorem ipsum dolor sit amet consectetur adipisicing elit. UZB',
+    'siteName' => 'ANT "MADAD"',
+    'slider' => 'Chet el fuqarolarini qollab-quvvatlash markazi',
     'more' => 'Batafsil',
     'slider2' => 'UZB Lorem ipsum dolor sit amet. UZB',
     'help' => 'Huquqiy yordam',
-    'helpText' => 'UZB Оказание юридической помощи иностранным гражданам проживающих UZB',
+    'helpText' => 'Xorijda istiqomat qiluvchi fuqarolarga huquqiy yordam korsatish',
     'cons' => 'MASLAHAT',
     'constext' => 'UZB Консультации по вопросам законного оформления регистраций, патентов UZB',
     'friend' => 'Xalqlar aro do\'stlik',
@@ -30,7 +30,8 @@ return [
     'media1' => 'RUS Lorem ipsum amplet Lorem ipsum dolor sit. RUS',
     'cons' => 'KONSULTANTLAR',
     'consAll' => 'BARCHA KONSULTANTLAR',
-    '' => '',
+    'cookie' => 'Sayt cookie fayllarini ishlatadi. <a href="https://cookiesandyou.com/" target="_blank">Cookie fayllar haqida ko\'proq bilish</a>',
+    'cookieBtn' => 'Qabul qilish',
     '' => '',
     '' => '',
     '' => '',
